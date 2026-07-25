@@ -1,6 +1,7 @@
 fn main() {
     // TODO: Create an array called `a` with at least 100 elements in it.
-    // let a = ???
+    // let a = [1; 100];
+    let a = "1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890";
 
     if a.len() >= 100 {
         println!("Wow, that's a big array!");
