@@ -34,7 +34,60 @@ impl Default for Person {
 // 5. Parse the second element from the split operation into a `u8` as the age.
 // 6. If parsing the age fails, return the default of `Person`.
 impl From<&str> for Person {
-    fn from(s: &str) -> Self {}
+    fn from(s: &str) -> Self {
+        // let name;
+        // let age;
+        // let mut count = 0;
+        // let mut split_iter: std::str::Split<'_, char> = s.split(',');
+        // while let Some(part) = split_iter.next() {
+        //     if count > 2 {
+        //         break;
+        //     }
+
+        //     match count {
+        //         0 => name = part,
+        //         1 => age = part,
+        //         _ => panic!("shouldn't happen"),
+        //     }
+        //     count += 1;
+        // }
+
+        // if count < 2 || name.is_empty() || age.is_empty() {
+        //     return Person::default();
+        // }
+
+        // let age_parsed = age.parse::<u8>();
+        // if age_parsed.is_err() {
+        //     return Person::default();
+        // }
+
+        // Person {
+        //     name: name.to_string(),
+        //     age: age_parsed.unwrap(),
+        // }
+
+        let name;
+        let mut split_iter = s.split(',');
+        if let Some(part) = split_iter.next()
+            && !part.is_empty()
+        {
+            name = part;
+        } else {
+            return Person::default();
+        }
+
+        if let Some(part) = split_iter.next()
+            && let Ok(parsed_age) = part.parse::<u8>()
+            && let None = split_iter.next()
+        {
+            Person {
+                name: name.to_string(),
+                age: parsed_age,
+            }
+        } else {
+            Person::default()
+        }
+    }
 }
 
 fn main() {
